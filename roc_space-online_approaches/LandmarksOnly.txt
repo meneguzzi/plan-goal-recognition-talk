@@ -1,0 +1,63 @@
+# Cubicles
+
+78.3 60.9
+
+# Blocks-World
+
+39.4 3.9
+
+# Campus
+
+92.8 3.5
+
+# Depots
+
+49.5 9.5
+
+# Driver-Log
+
+51.8 8.8
+
+# Dock-Worker-Robots
+
+45.1 7.9
+
+# Easy-IPC-Grid
+
+59.4 21.8
+
+# Ferry
+
+82.4 5.4
+
+# Intrusion-Detection
+
+87.6 3.9
+
+# Kitchen
+
+100 50
+
+# Logistics
+
+56.1 9.5
+
+# Miconic
+
+82.5 9.7
+
+# Rovers
+
+72.1 8.5
+
+# Satellite
+
+78.2 9.3
+
+# Sokoban
+
+58.1 14.1
+
+# ZenoTravel
+
+70.8 6.4
