@@ -8,11 +8,14 @@
 \usepackage{listings}
 \usepackage{letltxmacro}
 \usepackage{algorithm, algpseudocode}
+\usepackage{subcaption}
 
 \newcommand{\todo}[1]{ {\color{red} #1} }
 
 \def\masterclass{1}
 \def\masterclass{0}
+
+\logo{\includegraphics[width=4cm]{politecnica.pdf}}
 
 \usetheme{Madrid}
 \usecolortheme{seagull}
@@ -23,12 +26,13 @@
 \\
 \url{felipe.meneguzzi@pucrs.br}
 }
-\date{Porto Alegre, April, 2018}
+\date{October, 2018}
 \AtBeginSection[]
 {
   \begin{frame}
     \frametitle{Table of Contents}
-    \tableofcontents[currentsection]
+    % \tableofcontents[currentsection,sectionstyle=show/hide,subsectionstyle=show/hide/show]
+	\tableofcontents[currentsection]
   \end{frame}
 }
 
@@ -39,6 +43,8 @@
     \begin{frame}
         \titlepage
     \end{frame}
+	% \logo{\includegraphics[width=1cm]{politecnica.pdf}}
+	\logo{}
     
 %---------------------------------------------------------------------------------
 \section{Introduction}
@@ -1308,6 +1314,12 @@
 % 	Get slides from Roger
 % \end{frame}
 
+\begin{frame}[c]
+	\begin{center}
+		\Large{Plan Recognition using Video Data}
+	\end{center}
+\end{frame}
+
 \begin{frame}[c]\frametitle{Plan Recognition using Video Data}
 	\begin{itemize}
    		\item \textbf{Plan recognition}
@@ -1627,6 +1639,8 @@
 
 %---------------------------------------------------------------------------------
 
+
+% \subsection{Activity Recognition using Deep Learning}
 % \begin{frame}[c]\frametitle{Motivation}
 % 	\begin{itemize}
 % 		\item Activity recognition:
@@ -1669,7 +1683,232 @@
 % \end{frame}
 
 %---------------------------------------------------------------------------------
+\subsection{Plan Recognition in Latent Space}
+
+\begin{frame}[c]
+	\begin{center}
+		\Large{Plan Recognition in Latent Space}
+	\end{center}
+\end{frame}
+
+\begin{frame}[c]{Motivation}
+	\begin{itemize}
+		\item Goal and Plan Recognition depend on high-quality domain engineering
+		\begin{itemize}
+			\item PDDL domain theory for PRAP
+			\item Plan Library for traditional PR
+		\end{itemize}
+		\item We would like to obviate the need for most domain engineering
+		\begin{itemize}
+			\item Learn domain models directly from raw data
+			\item Recognize goals using raw data as observations
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Variational Autoencoders}
+	\begin{itemize}
+		\item Autoencoders are a specific type of Neural Network intended to learn representations
+		\item Consists of three key parts
+		\begin{itemize}
+			\item Encoder network
+			\item Latent layer (the middle layer)
+			\item Decoder network
+		\end{itemize}
+		\item Trained in an unsupervised manner
+		\item Variational Autoencoders force the the encoder network to generate latent vectors following some distribution \\(typically a unit-gaussian one)
+	\end{itemize}
+	
+	\begin{center}
+		\includegraphics[width=5cm]{fig/autoencoder.pdf}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}[c]{Gumbel-softmax autoencoders and planning}
+	\begin{itemize}
+		\item Planners view states as sets of logical propositions (i.e. binary vectors)
+		\item We would like to be able to learn state representations from raw data
+		\item We force an autoencoder to have a categorial distribution in the latent layer:
+		\begin{itemize}
+			\item Gumbel-softmax activation can be annealed into a categorical distribution
+			\item Latent layer now correspond to \textbf{logic bits}
+			\item Can learn a PDDL transition function from pairs of states
+		\end{itemize}
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=8cm]{fig/cat-autoencoder.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}[c]{Inspiration: LatPlanner}
+	\begin{center}
+		\includegraphics[width=10cm]{fig/latplan.pdf}
+	\end{center}
+\end{frame}
+
+\begin{frame}[c]{Goal Recognition using Raw Data}
+	\begin{itemize}
+		\item Once we learn the internal representation, we can recognize plans as sequences of steps
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=8cm]{fig/problem_representation.pdf}
+	\end{center}
+\end{frame}
+
+\begin{frame}[c]{Goal Recognition in Latent Space}
+	\begin{columns}
+		\begin{column}{.35\textwidth}
+			Key steps in the approach
+			\small
+			\begin{itemize}
+				\item Train autoencoder using an image dataset (binary representation)
+				\item Infer transition function from pairs of encoded images (states)
+				\item Convert Goal Recognition problem to latent space using autoencoder
+				\item Recognize goals using PRAP algorithms (ours)
+			\end{itemize}
+		\end{column}
+		\begin{column}{.6\textwidth}
+			\begin{center}
+				\includegraphics[width=.85\textwidth]{fig/IGR_Full.pdf}
+			\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c]{Domains}
+	Experiments consisted of predicting final state of 3 distinct games
+	\begin{figure}
+	\begin{subfigure}{.15\textwidth}
+	  \centering
+	  \includegraphics[scale=1.0]{fig/mnist}
+	  \caption{MNIST}
+	  \label{fig:sfig1}
+	\end{subfigure}%
+	\begin{subfigure}{.15\textwidth}
+	  \centering
+	  \includegraphics[scale=1.0]{fig/mandrill}
+	  \caption{Mandrill}
+	  \label{fig:sfig2}
+	\end{subfigure}%
+	\begin{subfigure}{.15\textwidth}
+	  \centering
+	  \includegraphics[scale=1.0]{fig/spider.png}
+	  \caption{Spider}
+	  \label{fig:sfig3}
+	\end{subfigure}
+	\vspace{1cm}
+	\begin{subfigure}{.15\textwidth}
+	  \centering
+	  \includegraphics[scale=1.0]{fig/lod}
+	  \caption{LO Digital}
+	  \label{fig:sfig4}
+	\end{subfigure}%
+	\begin{subfigure}{.15\textwidth}
+	  \centering
+	  \includegraphics[scale=1.0]{fig/lot}
+	  \caption{LO Twist}
+	  \label{fig:sfig5}
+	\end{subfigure}%
+	\begin{subfigure}{.15\textwidth}
+	  \centering
+	  \includegraphics[scale=1.0]{fig/hanoi.pdf}
+	  \caption{Hanoi}
+	  \label{fig:sfig6}
+	\end{subfigure}
+	\vspace{-2em}
+	\caption{Sample state for each domain.}
+	\label{fig:fig}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[c]{Experiments}
+	\begin{table}[h!]
+	\fontsize{6}{5}\selectfont
+	\centering
+	\def\arraystretch{0.55}
+	\resizebox{\textwidth}{!}{\begin{tabular}{|c|c|cc|ccc|ccc|ccc|}
+	\hline
+	\multicolumn{4}{|c|}{} & \multicolumn{3}{c|}{\textsc{POM} ($\mathit{h_{uniq}}$)} & \multicolumn{3}{c|}{\textsc{RG}}  \\ \hline
+	\textbf{Domain} & $|\mathcal{G}|$    & (\%) \textbf{Obs} & $|O|$   & \begin{tabular}[c]{@{}c@{}}\textbf{Time (s)}\\$\theta$ (0 / 10)\end{tabular}      & \begin{tabular}[c]{@{}c@{}}\textbf{Accuracy} \%\\$\theta$ (0 / 10)\end{tabular} & \begin{tabular}[c]{@{}c@{}} \textbf{Spread in} $\mathcal{G}$\\$\theta$ (0 / 10)\end{tabular}  & \textbf{Time (s)} & \textbf{Accuracy} \% & \textbf{Spread in} $\mathcal{G}$ \\ \hline
+	 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	 &      
+	 & 10  & 1.0 
+	 &  \textbf{0.074} / \textbf{0.080}  &  33.3\% / 33.3\%  &  2.6 / \textbf{2.6}
+	 &  \textbf{0.179}  &  \textbf{100.0\%} &  \textbf{4.8}       \\ &
+	 & 30  & 3.0 
+	  &  \textbf{0.079} / \textbf{0.085} &  \textbf{83.3\%} / \textbf{83.3\%} &  \textbf{1.0} / \textbf{2.5}
+	 &  \textbf{0.188}  &  \textbf{100.0\%} &  \textbf{1.3}        \\
+	 8-Puzzle  & 6.0 
+	 & 50  & 4.0 
+	 &  \textbf{0.088} / \textbf{0.091}  &  \textbf{100.0\%} / \textbf{100.0\%}  &  \textbf{1.1} / \textbf{1.6}
+	 &  \textbf{0.191}  &  \textbf{100.0\%} &  \textbf{1.3}        \\ &      
+	 & 70  & 5.3 
+	 &  \textbf{0.092} / \textbf{0.100}  &  \textbf{100.0\%} / \textbf{100.0\%} &  \textbf{1.0} / \textbf{1.0}
+	 &  \textbf{0.210}  &  \textbf{100.0\%} &  \textbf{1.0}       \\ &      
+	 & 100 & 7.3  
+	 &  \textbf{0.108} / \textbf{0.110}  &  \textbf{100.0\%} / \textbf{100.0\%}  &  \textbf{1.0} / \textbf{1.0}
+	 &  \textbf{0.246}  &  83.3\% &  \textbf{1.1}      \\ \hline
+	 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	&      
+	& 10  & 1.2 
+		&  0.555 / 0.562  &  \textbf{40.0\%} / \textbf{60.0\%}  &  \textbf{1.6} / 3.2
+	    &  21.25  &  \textbf{100.0\%} &  6.0       \\ &      
+	& 30  & 3.0 
+		&  0.587 / 0.599 &  20.0\% / 80.0\%  &  1.4 / 3.0
+	    &  22.26  &  \textbf{100.0\%} &  4.8        \\
+	MNIST  & 6.0 
+	& 50  & 4.0 
+		&  0.609 / 0.628 &  60.0\% / 80.0\%   &  2.2 / 2.8
+	    &  22.48  &  \textbf{100.0\%} &  4.8        \\ &      
+	& 70  & 5.8 
+		&  0.631 / 0.654  &  60.0\% / \textbf{100.0\%}  &  2.4 / 3.6           
+	    &  23.53  &  \textbf{100.0\%} &  3.2       \\ &      
+	& 100 & 7.8  
+		&  0.676 / 0.681  &  80.0\% / \textbf{100.0\%}  &  2.4 / 3.0
+	    &  26.34  &  \textbf{100.0\%} &  3.4      \\ \hline
+
+	\end{tabular}}
+	\end{table}
+	
+	\begin{itemize}
+		\item Learned domain-theory representations for all experimental domains
+		\item Learned models useable to recognize goals almost as well as  
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}[c]{Contributions and Future Work}
+	\begin{itemize}
+		\item We developed an approach for goal recognition capable of obviating the need for human engineering to create a task for goal recognition
+		\item Empirical results shows that our approach comes close to standard goal recognition techniques
+		\item Future work:
+		\begin{itemize}
+			\item Improve generalization of state autoencoder
+			\item Compress redundant (ground) actions
+			\item Extend the technique for video streams
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\subsection{LSTM-based plan recognition}
+
+
+\begin{frame}[c]{Motivation}
+	TBD
+\end{frame}
+
 \section{Summary and Future Directions}
+
+\begin{frame}[c]\frametitle{Papers reporting these results}
+	\footnotesize
+	\begin{itemize}
+	\item[] AMADO, Leonardo R.; PEREIRA, Ramon F.; AIRES, João Paulo; MAGNAGUAGNO, Maurício C.; GRANADA, Roger Leitzke; and MENEGUZZI, Felipe. \textbf{Goal Recognition in Latent Space.} IJCNN, 2018.
+	\item[] VERED, Mor; PEREIRA, Ramon F.; KAMINKA, Gal; and MENEGUZZI, Felipe. \textbf{Online Goal Recognition as Reasoning over Landmarks.} PAIR@AAAI, 2018.
+	\item[] VERED, Mor; PEREIRA, Ramon F.; KAMINKA, Gal; and MENEGUZZI, Felipe. \textbf{Towards Online Goal Recognition Combining Goal Mirroring and Landmarks.} AAMAS, 2018.
+	\end{itemize}
+\end{frame}
+
 
 \begin{frame}[c]\frametitle{Papers reporting these results}
 	\footnotesize
@@ -1696,7 +1935,7 @@
 		\item We illustrated applications of these techniques:
 		\begin{itemize}
 			\item Real world video-data
-			\item Multiagent systems
+			\item Plan Recognition in Latent Space
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -1761,11 +2000,14 @@
 
 	{
 	\setbeamercolor{background canvas}{bg=lightgray}
-    \begin{frame}{}
+    \begin{frame}[c]{}
     		\centering
     		Thank you!
 			\\
 			Questions?
+			\begin{center}
+				\includegraphics[width=6cm]{politecnica.pdf}
+			\end{center}
     \end{frame}
     }
 
