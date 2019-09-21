@@ -1,6 +1,10 @@
 # Created by https://www.gitignore.io/api/latex
 
 sicsa-planrecognition-presentation.pdf
+bracis-goal-recognition-presentation.pdf
+bracis-goal-recognition-presentation.synctex.gz
+
+pucrs-planrecognition-presentation.synctex.gz
 
 ### LaTeX ###
 *.acn

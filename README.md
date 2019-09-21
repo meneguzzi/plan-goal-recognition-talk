@@ -1,5 +1,9 @@
-# Talk on Plan and Goal Recognition
+# Goal Recognition with Real World Data
+# Abstract
+Plan and goal recognition is the task of inferring the plan and goal of an agent through the observation of its actions and its environment and has a number of applications on computer-human interaction, assistive technologies and surveillance. 
+Recent work on such techniques using planning domain theories require almost perfect engineering of the domain theory and usually rely on assumptions of observability being either full, noise-free, or both.
+These assumptions are too strong in the real world, regardless of the technique used to translate sensor data into symbolic logic-based observations. 
+In this talk, we discuss plan recognition techniques based on classical planning domain theories gradually relax all of these assumptions by leveraging advances on both symbolic planning and machine learning.
 
-## Topics Covered
-
-## 
+# Mini Bio
+Felipe Meneguzzi is a professor in computer science at the Pontifical Catholic University of Rio Grande do Sul (PUCRS). He received his PhD degree in Computer Science from King's College London (KCL) and holds an MSc degree from PUCRS. Prior to hs current appointment Felipe was a Research Fellow at Carnegie Mellon University (CMU) and prior to his academic career he was a Technical Leader at Hewlett Packard Brazil. Felipe's research focuses on reasoning mechanisms for autonomous agents, with a focus on integrating various approaches to achieve not only efficient but also socially good behaviour by following societal norms. To this end, Felipe has contributed with approaches involving planning, machine learning and logic spanning the width of modern AI research. Felipe is currently classified as a highly productive research in Brazil (PQ2) and received numerous awards for his work (including the 2016 Google Research Award for Latin America), service (including the best PC member for PRIMA 2013), and for his students. He currently leads the Research Group on Autonomous Systems at PUCRS where he carries out research on Goal Recognition, Automated Planning and Deep Learning. 
