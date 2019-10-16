@@ -1,0 +1,7 @@
+(:action peel-boiled-egg
+    :parameters (?e - egg ?d - cooking-dish)
+    :precondition (and (boiled-egg ?e) 
+                    (holding ?e) (on ?e ?d))
+    :effect (and (hard-boiled-egg ?e) 
+                (not (shell-egg ?e)))
+)
