@@ -55,7 +55,7 @@
 	% \logo{\includegraphics[width=1cm]{politecnica.pdf}}
 	\logo{}
     
-	\begin{frame}[c]{Keynote?}
+	\begin{frame}[c]{A researcher with a vision}
 		\begin{center}
 			\includegraphics[height=.8\textheight]{fig/felipe1.jpg}
 		\end{center}
@@ -75,21 +75,6 @@
 % 		\end{itemize}
 % 	\end{frame}
 
-	\begin{frame}[c]\frametitle{Why do we need plan recognition?}
-		\begin{itemize}
-			\item Recognizing plans and goals of others is a critical ability for intelligent interaction:
-			\begin{itemize}
-				\item important for humans/agents working in the same environment
-				\item increasingly important as we build more intelligent systems
-			\end{itemize}
-			\item Overall area of Plan, Activity and Intent Recognition
-			\begin{itemize}
-				\item Activity recognition: recognizing meaningful activities from low-level sensor data
-				\item Plan/Intent/Goal recognition: recognizing intentional higher-level sequences of activities 
-			\end{itemize}
-		\end{itemize}
-	\end{frame}
-
 	\begin{frame}[c]\frametitle{What is it?}
 		\begin{itemize}
 			\item \textbf{Goal Recognition} is the task of recognizing agents' goal that explains a sequence of observations of its actions;
@@ -97,10 +82,33 @@
 				\item Related to plan recognition, i.e. recognizing a \emph{top-level} action
 				\item A specific form of the problem of abduction 
 			\end{itemize}
-			\item Approaches to goal and plan recognition divided into roughly two types:
+			\item Roughly two types of approach:
 			\begin{itemize}
 				\item Plan-library based (\emph{classical} plan recognition)
 				\item Domain-theory based (plan recognition as planning, or PRAP)
+			\end{itemize}
+		\end{itemize}
+		\begin{center}
+			\includegraphics[width=.4\textwidth]{fig/gr-approaches/gr-concept.pdf}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}[c]\frametitle{Why do we need goal recognition?}
+		\begin{itemize}
+			\item Recognizing plans and goals of others is critical for meaningful interaction:
+			\begin{itemize}
+				\item important for humans/agents working in the same environment
+				\item increasingly important as we build more intelligent systems
+			\end{itemize}
+			\begin{center}
+				\includegraphics<1->[height=8em]{fig/intent-recognition-robot.jpg}
+				\includegraphics<2>[height=8em]{fig/elderly-care.jpg}
+				\includegraphics<3>[height=8em]{fig/creepy-care.jpg}
+			\end{center}
+			\item Overall area of Plan, Activity and Intent Recognition
+			\begin{itemize}
+				\item Activity recognition: recognizing meaningful activities from low-level sensor data
+				\item Plan/Intent/Goal recognition: recognizing intentional higher-level sequences of activities 
 			\end{itemize}
 		\end{itemize}
 	\end{frame}
@@ -250,49 +258,118 @@
 
 \section{A Canned History of Current Approaches}
 
-\begin{frame}[c]{Goal Recognition using Planning Formalisms}
-	\begin{itemize}
-		\item Ramirez and Geffner
-		\item E-Martín
-		\item Sohrabi
-		\item Pereira and Meneguzzi
-	\end{itemize}
-\end{frame}
+% \begin{frame}[c]{Goal Recognition using Planning Formalisms}
+% 	\begin{itemize}
+% 		\item Ramirez and Geffner
+% 		\item E-Martín
+% 		\item Sohrabi
+% 		\item Pereira and Meneguzzi
+% 	\end{itemize}
+% \end{frame}
 
-\begin{frame}[c]\frametitle{Goal Recognition using Planning Domains}
-	{\color{red} Add Figure illustrating path cost differentials}
+\begin{frame}[c,allowframebreaks]\frametitle{Goal Recognition using Planning Domains}
+	
 	Ramirez and Geffner (2009 and 2010)
 	\begin{itemize}
 		\item First approaches to goal recognition: Plan Recognition as Planning (PRAP)
 		\item Probabilistic model aims to compute $P(G \mid O)$
 		\item Following Bayes Rule $P(G \mid O) = \alpha P(O \mid G) P(G)$
 		\item Given $P(G)$ as a prior, key bottleneck is computing $P(O \mid G)$
-		\begin{itemize}
-			\item Compute $P(O \mid G)$ in terms of a cost difference $c(G,O) - c(G,\bar{O})$
-			\item Computational cost is \textbf{two planner calls per goal hypothesis}
-			\item For online recognition: two planner calls per goal hypothesis \textbf{per observation}
-		\end{itemize}
-		\item Some conclusions challenged for path planning domains\\ (Masters and Sardina 2017)
+		% \begin{itemize}
+% 			\item Compute $P(O \mid G)$ in terms of a cost difference $c(G,O) - c(G,\bar{O})$
+% 			\item Computational cost is \textbf{two planner calls per goal hypothesis}
+% 			\item For online recognition: two planner calls per goal hypothesis \textbf{per observation}
+% 		\end{itemize}
+% 		\item Some conclusions challenged for path planning domains\\ (Masters and Sardina 2017)
 	\end{itemize}
+	\begin{columns}
+		\begin{column}{.5\textwidth}
+			\begin{itemize}
+				\normalsize
+				\item Compute $P(O \mid G)$ in terms of a cost difference $c(G,O) - c(G,\bar{O})$
+				\item Costs \textbf{two planner calls per goal hypothesis}
+				% \item For online recognition: two planner calls per goal hypothesis
+			\end{itemize}
+		\end{column}
+		\begin{column}{.5\textwidth}
+			\begin{center}
+				\includegraphics[width=12em]{fig/gr-approaches/gr-ramirez.pdf}
+			\end{center}
+		\end{column}
+	\end{columns}
+	% \framebreak
+	%
+	% E-Martín et al. (2015)
+	%
+	% \framebreak
+	%
+	% Sohrabi et al. (2017)
 \end{frame}
 
 \begin{frame}[c]{Goal Recognition using Planning Heuristics}
-	{\color{red} Add Figure illustrating paths through landmarks}
 	Pereira, Oren and Meneguzzi (2017):
    	\begin{itemize}
 		\item \textbf{Obviate the need to execute a planner multiple times} for recognizing goals; and
-		\item Novel goal recognition heuristics that \textbf{use planning landmarks}.
+		\item Novel goal recognition heuristics that use \textbf{planning landmarks}.
 		% \item We evaluate our approaches against the fastest and most accurate approach of Ramírez and Geffner ({\footnotesize Plan Recognition as Planning. IJCAI, 2009}) over \textbf{15 planning domains};
 		\item \textbf{More accurate} and \textbf{orders of magnitude faster} than all previous approaches.
 	\end{itemize}
+	\begin{columns}
+		\begin{column}{.5\textwidth}
+			Planning Landmarks:
+			\begin{itemize}
+				\item Are \textbf{necessary conditions} for any valid plan
+				\item Theoretical cost of computation is the same as planning
+			\end{itemize}
+		\end{column}
+		\begin{column}{.5\textwidth}
+			\begin{center}
+				\includegraphics[width=12em]{fig/gr-approaches/gr-landmarks.pdf}
+			\end{center}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[c]{Goal Recognition using Operator-Counting Constraints}
-	
+	Meneguzzi, Pereira and Pereira (2020):
+   	\begin{itemize}
+		\item Use \textbf{operator counting} heuristic information for recognizing goals; and
+		\item Operator counts and LP constraints cope explicitly with noisy observations.
+		% \item We evaluate our approaches against the fastest and most accurate approach of Ramírez and Geffner ({\footnotesize Plan Recognition as Planning. IJCAI, 2009}) over \textbf{15 planning domains};
+	\end{itemize}
+	\begin{columns}
+		\begin{column}{.5\textwidth}
+			Key advantages:
+			\begin{itemize}
+				\item \textbf{More accurate} than all previous approaches; and
+				\item Provides an \textbf{extensible framework} for further goal recognition work.
+			\end{itemize}
+		\end{column}
+		\begin{column}{.5\textwidth}
+			\begin{center}
+				\includegraphics[width=12em]{fig/gr-approaches/gr-operator-counting.pdf}
+			\end{center}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
 \section{Goal Recognition using Real World Data}
+
+{
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{fig/fightclub.pdf}}%
+\begin{frame}[b]{Warning}
+\begin{itemize} \Large
+	\item \color{white} I will now talk about Machine Learning, \\ but I do not buy into the hype
+	\item<2-> ML Inverse Fight Club (James Mickens)
+	\begin{enumerate} \color{white} \large
+		\item<3-> First Rule: You must talk about fight club
+		\item<4-> Second Rule: Let's not fight because we all agree that ML is awesome
+	\end{enumerate}
+\end{itemize}
+\vspace*{2em}
+\end{frame}
+}
 
 \begin{frame}[c]{Where can we use real-world data?}
 	\begin{columns}
@@ -331,24 +408,10 @@
 	\end{itemize}
 \end{frame}
 
-{
-\usebackgroundtemplate{\includegraphics[width=\paperwidth]{fig/fightclub.pdf}}%
-\begin{frame}[c]{Warning}
-\begin{itemize} \Large
-	\item \color{white} I will now talk about Machine Learning, but I do not buy into the hype
-	\item<2-> ML Inverse Fight Club (James Mickens)
-	\begin{enumerate} \color{white} \large
-		\item<3-> First Rule: You must talk about fight club
-		\item<4-> Second Rule: Let's not fight because we all agree that ML is awesome
-	\end{enumerate}
-\end{itemize}
-\end{frame}
-}
-
 
 {
 \usebackgroundtemplate{\includegraphics[width=\paperwidth]{fig/bengio.pdf}}%
-\begin{frame}[c]{Warning 2}
+\begin{frame}[b]{Machine Learning Again}
 	\begin{itemize} \Large
 		\item \color{white} Do I hate machine learning then?
 		\item<2-> No, I love it! 
@@ -357,23 +420,24 @@
 			\item<4-> If you want to impress your friends or peddle for money
 		\end{enumerate}
 	\end{itemize}
+	\vspace*{3em}
 \end{frame}
 }
 
-\begin{frame}[t]{Now let's talk politics}
-	\Huge Who should win the next election? \\[4em]
-	
-	
-	\onslide<2->{
-	
-		% \vspace{10em}
-		\begin{center}
-			\normalsize Just kidding, let's go back to our talk
-		\end{center}
-	}
-	
-	
-\end{frame}
+% \begin{frame}[t]{Now let's talk politics}
+% 	\Huge Who should win the next election? \\[4em]
+%
+%
+% 	\onslide<2->{
+%
+% 		% \vspace{10em}
+% 		\begin{center}
+% 			\normalsize Just kidding, let's go back to our talk
+% 		\end{center}
+% 	}
+%
+%
+% \end{frame}
 
 \begin{frame}[c]{How do we try to solve this?}
 	\begin{itemize}
@@ -388,7 +452,7 @@
 			\item Learn PDDL representations from image data
 			\item Learn \textbf{Nominal Models} from raw data
 		\end{itemize}
-		\item To work on both problem simultaneously
+		\item To work on both problems simultaneously
 		\begin{itemize}
 			\item Hybrid engineering/learning of PDDL representations 
 		\end{itemize}
@@ -407,28 +471,39 @@
 \end{frame}
 
 \begin{frame}[c]\frametitle{Plan Recognition using Video Data}
-	\begin{itemize}
-   		\item \textbf{Plan recognition}
-   		\begin{itemize}
-				\item Task of recognizing the plan (i.e., the sequence of actions) the observed agent is following in order to achieve his intention (Sadri, 2012)
-	    \end{itemize}
-		\item \textbf{Activity recognition}
+	% \begin{itemize}
+%    		\item \textbf{Plan recognition}
+%    		\begin{itemize}
+% 				\item Task of recognizing the plan (i.e., the sequence of actions) the observed agent is following in order to achieve his intention %(Sadri, 2012)
+% 	    \end{itemize}
+% 		\item \textbf{Activity recognition}
+% 			\begin{itemize}
+% 				\item The task of recognizing the independent set of actions that generates an interpretation to the movement that is being performed (Poppe,~2010)
+% 				\item This is particularly challenging in the real physical world
+% 			 \end{itemize}
+% 	\end{itemize}
+	\begin{columns}
+		\begin{column}{.7\textwidth}
 			\begin{itemize}
-				\item The task of recognizing the independent set of actions that generates an interpretation to the movement that is being performed (Poppe,~2010)
-				\item Such task is particularly challenging in the real physical world
-			 \end{itemize}
-		\item Much research effort focuses on activity and plan recognition as separate challenges;
-		\item We develop a hybrid approach that comprises both activity and plan recognition;
-		\item The approach infers, from a set of candidate plans, which plan a human subject is pursuing based exclusively on fixed-camera video.
-	\end{itemize}
+				\item Most research focuses on activity and plan recognition separately;
+				\item We develop a hybrid approach that comprises both;
+				\item The approach infers, from a set of candidate plans, which plan a human subject is pursuing based exclusively on fixed-camera video.
+			\end{itemize}
+		\end{column}
+		\begin{column}{.3\textwidth}
+			\begin{center}
+				\includegraphics[width=9em]{fig/computer-vision-eggs.pdf}
+			\end{center}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[c]\frametitle{A Hybrid Architecture for Activity and Plan Recognition}
    	\begin{itemize}
    		\item \textbf{Conceptually divided in two main parts}
    		\begin{itemize}
-				\item CNN-based activity recognition (CNN)
-                \item CNN-backed symbolic plan recognition (SBR)
+				\item CNN-based activity recognition (CNN)\footnote{That's us!}
+                \item CNN-backed symbolic plan recognition (SBR)\footnote{Not our work: Avrahami-Zilberbrand and Kaminka. Fast and Complete Symbolic Plan Recognition. IJCAI 2005}
 	    \end{itemize}
 	\end{itemize}
 	\begin{center}
@@ -478,30 +553,30 @@
 \end{frame}
 \fi
 
-\begin{frame}{Experiments: Dataset}
-   	\begin{itemize}
-   		\item ICPR 2012 Kitchen Scene Context based Gesture Recognition dataset (KSCGR)%\footnote{http://www.murase.m.is.nagoya-u.ac.jp/KSCGR/}
-	    \item \textbf{5 recipes for cooking eggs in Japan}
-   		\begin{itemize}
-				\item Ham and Eggs, Omelet, Scrambled-Egg, Boiled-Egg and Kinshi-Tamago
-				\item Each recipe is performed by 7 subjects \\(5 in training set, 2 in testing set)
-	    \end{itemize}
-	    \item \textbf{9 cooking activities composes the dataset}
-   		\begin{itemize}
-				\item Breaking, mixing, baking, turning, cutting, boiling, seasoning, peeling, and none
-	    \end{itemize}
-		\begin{figure}[here]
-			\centering
-			\includegraphics[width=0.7\linewidth]{fig/egg-dataset.pdf}
-		\end{figure}
-	\end{itemize}
-\end{frame}
+% \begin{frame}{Experiments: Dataset}
+%    	\begin{itemize}
+%    		\item ICPR 2012 Kitchen Scene Context based Gesture Recognition dataset (KSCGR)%\footnote{http://www.murase.m.is.nagoya-u.ac.jp/KSCGR/}
+% 	    \item \textbf{5 recipes for cooking eggs in Japan}
+%    		\begin{itemize}
+% 				\item Ham and Eggs, Omelet, Scrambled-Egg, Boiled-Egg and Kinshi-Tamago
+% 				\item Each recipe is performed by 7 subjects \\(5 in training set, 2 in testing set)
+% 	    \end{itemize}
+% 	    \item \textbf{9 cooking activities within the dataset}
+%    		\begin{itemize}
+% 				\item Breaking, mixing, baking, turning, cutting, boiling, seasoning, peeling, and none
+% 	    \end{itemize}
+% 		\begin{figure}[here]
+% 			\centering
+% 			\includegraphics[width=0.7\linewidth]{fig/egg-dataset.pdf}
+% 		\end{figure}
+% 	\end{itemize}
+% \end{frame}
 
 \begin{frame}[c]{How are we doing so far?}
 	\begin{itemize}
 		\item To Generate Symbolic Observations:
 		\begin{itemize}
-			\item ML to map raw data into recognition algorithm {\Large \color{red} \checkmark}
+			\item ML to map raw data into a recognition algorithm {\Large \color{red} \checkmark}
 			\item ML algorithms to generate \textbf{symbolic observations}
 		\end{itemize}
 		\item Obtain Domain Knowledge:
@@ -539,11 +614,11 @@
 				\item $\incp{O}$ is a set of incomplete operators. An operator $\inc{op} \in \incp{O}$ defines: 
 				\begin{itemize}
 					\item $pre(\inc{op}) \subseteq \mathcal{R}$ as a set of known preconditions;
-					\item $\widetilde{pre}(\inc{op}) \subseteq \mathcal{R}$ as a set of \textbf{possible preconditions};
+					\item<2-> $\widetilde{pre}(\inc{op}) \subseteq \mathcal{R}$ as a set of \textbf{possible preconditions};
 					\item $add(\inc{op}) \subseteq \mathcal{R}$ as a set of known add effects;
-					\item $\widetilde{add}(\inc{op}) \subseteq \mathcal{R}$ as a set of \textbf{possible add effects};
+					\item<2-> $\widetilde{add}(\inc{op}) \subseteq \mathcal{R}$ as a set of \textbf{possible add effects};
 					\item $del(\inc{op}) \subseteq \mathcal{R}$ as a set of known delete effects;
-					\item $\widetilde{del}(\inc{op}) \subseteq \mathcal{R}$ as a set of \textbf{possible delete effects};
+					\item<2-> $\widetilde{del}(\inc{op}) \subseteq \mathcal{R}$ as a set of \textbf{possible delete effects};
 				\end{itemize}
 			\end{itemize}
 		\end{definition}
@@ -563,17 +638,22 @@
 		\end{itemize}
     \end{frame}
 
-    \begin{frame}{Problem Overview (1 of 2)}
-       	\begin{itemize}
-       		\item We assume that the \textbf{recognizer} (\textbf{observer}) has an \textbf{incomplete domain model} while the \textbf{observed agent} is planning and acting in the environment with a \textbf{complete domain model};
-			\vspace{2mm}
-			\item We \textbf{do not change (or improve)} the incomplete domain model for recognizing goals;
-		\end{itemize}
-    \end{frame}
+    % \begin{frame}{Problem Overview (1 of 2)}
+%        	\begin{itemize}
+%        		\item We assume that the \textbf{recognizer} (\textbf{observer}) has an \textbf{incomplete domain model} while the \textbf{observed agent} is planning and acting in the environment with a \textbf{complete domain model};
+% 			\vspace{2mm}
+% 			\item We \textbf{do not change (or improve)} the incomplete domain model for recognizing goals;
+% 		\end{itemize}
+%     \end{frame}
+%
+%     \begin{frame}{Problem Overview (2 of 2)}
+% 		\begin{figure}[]
+% 		 	\centering
+% 		 	\includegraphics[width=0.9\linewidth]{fig/GoalRecognition-IncompleteDomains-Big.pdf}
+% 		\end{figure}
+%     \end{frame}
 	
-	%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	
-    \begin{frame}{Problem Overview (2 of 2)}
+    \begin{frame}{Problem Overview}
 		\begin{figure}[]
 		 	\centering
 		 	\includegraphics[width=0.9\linewidth]{fig/GoalRecognition-IncompleteDomains-Big.pdf}
@@ -584,7 +664,7 @@
 	\begin{itemize}
 		\item To Generate Symbolic Observations:
 		\begin{itemize}
-			\item ML to map raw data into recognition algorithm {\Large \checkmark}
+			\item ML to map raw data into a recognition algorithm {\Large \checkmark}
 			\item ML algorithms to generate \textbf{symbolic observations}
 		\end{itemize}
 		\item Obtain Domain Knowledge:
@@ -623,6 +703,12 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}[c]{Inspiration: LatPlanner\footnote{\tiny Not our Work: Asai and Fukunaga. Classical Planning in Deep Latent Space: Bridging the Subsymbolic-Symbolic Boundary, AAAI, 2018}}
+	\begin{center}
+		\includegraphics[width=10cm]{fig/latplan.pdf}
+	\end{center}
+\end{frame}
+
 \begin{frame}[c]{Variational Autoencoders}
 	\begin{itemize}
 		\item Autoencoders are a specific type of Neural Network intended to learn representations
@@ -658,18 +744,12 @@
 	\end{center}
 \end{frame}
 
-\begin{frame}[c]{Inspiration: LatPlanner}
-	\begin{center}
-		\includegraphics[width=10cm]{fig/latplan.pdf}
-	\end{center}
-\end{frame}
-
 \begin{frame}[c]{Goal Recognition using Raw Data}
 	\begin{itemize}
-		\item Once we learn the internal representation, we can recognize plans as sequences of steps
+		\item Once we learn the internal representation, we can recognize plans as sequences of images, but using symbolic goal recognition algorithms
 	\end{itemize}
 	\begin{center}
-		\includegraphics[width=8cm]{fig/problem_representation.pdf}
+		\includegraphics[width=8cm]{fig/lat_rec_problem.pdf}
 	\end{center}
 \end{frame}
 
@@ -693,11 +773,11 @@
 	\end{columns}
 \end{frame}
 
-\begin{frame}[c]{How do we try to solve this?}
+\begin{frame}[c]{How are we doing so far?}
 	\begin{itemize}
 		\item To Generate Symbolic Observations:
 		\begin{itemize}
-			\item ML to map raw data into recognition algorithm {\Large \checkmark}
+			\item ML to map raw data into a recognition algorithm {\Large \checkmark}
 			\item ML algorithms to generate \textbf{symbolic observations} 
 		\end{itemize}
 		\item Obtain Domain Knowledge:
@@ -738,24 +818,24 @@
 		\end{figure}
     \end{frame}	
 	
-    \begin{frame}{Introduction}
-       	\begin{itemize}
-			\vspace{3mm}
-			\item We can learn \textbf{Nominal models} from observations on transitions of systems; 
-				\begin{itemize}
-					\vspace{1.5mm}
-					\item We use \textbf{Deep Neural Networks} to obtain \textit{nominal models};
-					\vspace{1.5mm}
-					\item \textit{Nominal models} support \textbf{continuous} action and state spaces;
-				\end{itemize}	
-			
-			\vspace{3mm}
-			\item We \textbf{adapt two goal recognition approaches} to cope with \textit{nominal models};
-			\begin{itemize}
-				\item Performing \textbf{offline and online} goal recognition.
-			\end{itemize}
-		\end{itemize}
-    \end{frame}
+		%     \begin{frame}{Introduction}
+		%        	\begin{itemize}
+		% 	\vspace{3mm}
+		% 	\item We can learn \textbf{Nominal models} from observations on transitions of systems;
+		% 		\begin{itemize}
+		% 			\vspace{1.5mm}
+		% 			\item We use \textbf{Deep Neural Networks} to obtain \textit{nominal models};
+		% 			\vspace{1.5mm}
+		% 			\item \textit{Nominal models} support \textbf{continuous} action and state spaces;
+		% 		\end{itemize}
+		%
+		% 	\vspace{3mm}
+		% 	\item We \textbf{adapt two goal recognition approaches} to cope with \textit{nominal models};
+		% 	\begin{itemize}
+		% 		\item Performing \textbf{offline and online} goal recognition.
+		% 	\end{itemize}
+		% \end{itemize}
+		%     \end{frame}
 	
 	% Slides skipped from the original
 	
@@ -773,6 +853,7 @@
 				% \item To acquire \textbf{nominal models} we use a DNN developed by Say et al. (IJCAI, 2017)\footnote{\tiny \it Say et al., Nonlinear Hybrid Planning with Deep Net Learned Transition Models and Mixed-Integer Linear Programming. IJCAI, 2017.}.
 				\item We acquire \textbf{nominal models} by training a DNN
 				\item Trained DNN becomes the \textbf{transition function}
+				\item \textit{Nominal models} support \textbf{continuous} action and state spaces;
 			\end{itemize}		
     \end{frame}
 	
@@ -815,7 +896,7 @@
 				\vspace{2mm}
 	       		\item \textbf{Ideal-plan} ($\pi_G$): a plan computed from $\mathcal{I}$ to every goal $G$ in $\mathcal{G}$;
 				\vspace{2mm}
-				\item \textbf{$O$-plan} ($\pi_{O,G}$): a plan computed for every pair ${\cal I}$, $G$, and it is required to visit every state in $O$. 
+				\item \textbf{$O$-plan} ($\pi_{O,G}$): a plan computed for every pair ${\cal I}$, $G$, which must visit every state in $O$. 
 			\end{itemize}
     \end{frame}
 	
@@ -902,7 +983,7 @@
 		\begin{column}{.6\textwidth}
 			\begin{itemize}
 				\item<1-> Machine Learning models are the unchallenged state of the art for computer vision: \\ \onslide<2-> {~\color{red} Deal with it}
-				\item<3-> Most computer vision datasets (and algorithms) already contain \textbf{annotated semantic information}:
+				\item<3-> Most computer vision datasets already contain \textbf{annotated semantic information} (and algorithms assume their existence):
 				\begin{itemize}
 					\item Labels for \textbf{objects} and \textbf{relations}
 				\end{itemize}
@@ -946,19 +1027,19 @@
 	\begin{columns}
 		\begin{column}{.3\linewidth}
 			\tiny
-			\texttt{<{\color{red}person},{\color{black}hold},{\color{purple}shell-egg}>}\\
+			\texttt{<{\color{red}person},{\color{black}holding},{\color{purple}shell-egg}>}\\
 			\texttt{<{\color{Magenta}shell-egg},{\color{black}in},{\color{blue}pan}>}\\
-			\texttt{<{\color{red}person},{\color{black}hold},{\color{black}hashi}>}\\
-			\texttt{<{\color{black}hashi},{\color{black}move},{\color{black}egg}>}
+			\texttt{<{\color{red}person},{\color{black}holding},{\color{black}hashi}>}\\
+			% \texttt{<{\color{black}hashi},{\color{black}moving},{\color{black}egg}>}
 		\end{column}
 		\begin{column}{.3\linewidth}
 			\tiny
-			\texttt{<{\color{red}person},{\color{black}hold},{\color{OliveGreen}boiled-egg}>}\\
+			\texttt{<{\color{red}person},{\color{black}holding},{\color{OliveGreen}boiled-egg}>}\\
 			\texttt{<{\color{OliveGreen}boiled-egg},{\color{black}on},{\color{orange}bowl}>}
 		\end{column}
 		\begin{column}{.3\linewidth}
 			\tiny
-			\texttt{<{\color{red}person},{\color{black}hold},{\color{blue}hard-boiled-egg}>}\\
+			\texttt{<{\color{red}person},{\color{black}holding},{\color{blue}hard-boiled-egg}>}\\
 			\texttt{<{\color{OliveGreen}hard-boiled-egg},{\color{black}on},{\color{orange}bowl}>}
 		\end{column}
 	\end{columns}
@@ -2654,54 +2735,22 @@
 
 \section{Summary and Future Directions}
 
-\begin{frame}[c]\frametitle{Papers reporting these results}
-	\footnotesize
-	\begin{itemize}
-	\item[] PEREIRA, Ramon. F.; PEREIRA, André G.; MENEGUZZI, Felipe. \textbf{Landmark-Enhanced Heuristics for Goal Recognition in Incomplete Domain Models.} ICAPS, 2019. 
-	\item[] PEREIRA, Ramon. F.; VERED, Mor; MENEGUZZI, Felipe; RAMIREZ, Miquel. \textbf{Online Probabilistic Goal Recognition over Nominal Models.} IJCAI, 2019. 
-	\item[] AMADO, Leonardo R.; AIRES, João Paulo; PEREIRA, Ramon F.; MAGNAGUAGNO, Maurício C.; GRANADA, Roger L.; MENEGUZZI, Felipe. \textbf{An LSTM-Based Approach for Goal Recognition in Latent Space.} PAIR@AAAI, 2019. 
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[c]\frametitle{Papers reporting these results}
-	\footnotesize
-	\begin{itemize}
-	\item[] MENEGUZZI, Felipe; PEREIRA, André G.; PEREIRA, Ramon. F.. \textbf{Robust Goal Recognition with Operator-Counting Heuristics.} XAIP@ICAPS, 2019.  
-	\item[] AMADO, Leonardo R.; PEREIRA, Ramon F.; AIRES, João Paulo; MAGNAGUAGNO, Maurício C.; GRANADA, Roger Leitzke; and MENEGUZZI, Felipe. \textbf{Goal Recognition in Latent Space.} IJCNN, 2018.
-	\item[] AMADO, Leonardo R.; PEREIRA, Ramon F.; AIRES, João Paulo; MAGNAGUAGNO, Maurício C.; GRANADA, Roger Leitzke; and MENEGUZZI, Felipe. \textbf{Goal Recognition in Latent Space.} IJCNN, 2018.
-	\item[] VERED, Mor; PEREIRA, Ramon F.; KAMINKA, Gal; and MENEGUZZI, Felipe. \textbf{Online Goal Recognition as Reasoning over Landmarks.} PAIR@AAAI, 2018.
-	\item[] VERED, Mor; PEREIRA, Ramon F.; KAMINKA, Gal; and MENEGUZZI, Felipe. \textbf{Towards Online Goal Recognition Combining Goal Mirroring and Landmarks.} AAMAS, 2018.
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}[c]\frametitle{Papers reporting these results}
-	\footnotesize
-	\begin{itemize}
-	\item[] FRAGA PEREIRA, Ramon; MENEGUZZI, Felipe. \textbf{Landmark-based Plan Recognition.} ECAI, 2016.
-	\item[] PEREIRA, Ramon F.; OREN, Nir; and MENEGUZZI, Felipe. \textbf{Landmark-Based Heuristics for Goal Recognition}. AAAI, 2017.
-	\item[] PEREIRA, Ramon F.; OREN, Nir; and MENEGUZZI, Felipe. \textbf{Monitoring Plan Optimality using Landmarks and Domain-Independent Heuristics}. PAIR Workshop@AAAI, 2017.
-    \item[] GRANADA, Roger L.; PEREIRA, Ramon F.; MONTEIRO, Juarez; BARROS, Rodrigo; RUIZ, Duncan; and MENEGUZZI, Felipe. \textbf{Hybrid Activity and Plan Recognition for Video Streams}. PAIR Workshop@AAAI, 2017.
-    \item[] PEREIRA, Ramon F.; OREN, Nir; and MENEGUZZI, Felipe. \textbf{Detecting Commitment Abandonment by Monitoring Plan Execution}. AAMAS, 2017.
-    \item[] MONTEIRO, Juarez; GRANADA, Roger; BARROS, Rodrigo and MENEGUZZI, Felipe. \textbf{Deep Neural Networks for Kitchen Activity Recognition}. IJCNN, 2017.
-    \item[] VERED, Mor; PEREIRA, Ramon F.; MAGNAGUAGNO, Maurício C.; KAMINKA, Gal; and MENEGUZZI, Felipe. \textbf{Online Goal Recognition Combining Landmarks and Planning}. GRW@IJCAI, 2017.
-	\end{itemize}
-\end{frame}
-
 \begin{frame}[c]\frametitle{Summary}
 	\begin{itemize}
-		\item We progressively drop assumptions used by plan recognition about:
+		\item We progressively drop assumptions used by goal recognition about:
 		\begin{itemize}
 			\item<1-> Precision of domain knowledge
 			\item<2-> Quality of observations
 			\item<3-> Exclusively discrete domains
 			\item<4-> Existence of domain knowledge
 		\end{itemize}
-		\item Along the way, we showed how to perform:
+		\item Along the way, we showed how to perform goal recognition:
 		\begin{itemize}
-			\item Goal recognition using real world video-data
-			\item Goal Recognition in Latent Space
-			\item Lasting world peace
+			\item<1-> Using incomplete domain knowledge
+			\item<2-> Using real world video-data
+			\item<3-> Using learned (nominal) models
+			\item<4-> In Latent Space
+			\item<5-> Achieving lasting world peace \onslide<6->{\color{red}(Ok, maybe not)}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -2710,20 +2759,47 @@
 	\begin{itemize}
 		\item Plan Recognition with Domain Theories
         \begin{itemize}
-        	\item Use different landmark extraction algorithms;
+        	% \item Use different landmark extraction algorithms;
 % 			\item Use goal ordering techniques; 
-% 			\item Derive a probabilistic interpretation for the landmarks; and
+			% \item Refine probabilistic interpretations for GR in learned models;
 % 			\item Apply our landmark-based heuristics to continuous and temporal domains.
-			\item Extend landmark-based heuristics to temporal and non-uniform-cost domains
-            \item Experiment with more advanced notions of numeric landmarks \\(e.g. Scala et al.)
+			\item Extend heuristics to temporal and non-uniform-cost; domains
+            \item Experiment with more advanced notions of numeric landmarks \\(e.g. Scala et al.); and
+            \item Automatically infer first-order logic literals.
         \end{itemize}
-        \item Applications of Plan Recognition
-        \begin{itemize}
-        	\item Use object recognition techniques (deep learning) to generate fact observations in video
-            \item Couple the above with plan recognition in domain theories
-            \item Do plan recognition in latent space
-        \end{itemize}
+        % \item Applications of Plan Recognition
+%         \begin{itemize}
+%         	\item Use object recognition techniques (deep learning) to generate fact observations in video
+%             \item Couple the above with plan recognition in domain theories
+%             \item Do plan recognition in latent space
+%         \end{itemize}
+		\item More effective GR techniques combining learning and symbolic reasoning.
 	\end{itemize}
+\end{frame}
+
+\begin{frame}[c]\frametitle{A last bit of wisdom}
+	\begin{columns}
+		\begin{column}{.3\textwidth}
+			\includegraphics[width=\textwidth]{fig/gandalf-wisdom.jpg}
+		\end{column}
+		\begin{column}{.7\textwidth}
+			\begin{center}
+				Effective AI combines search (symbolic reasoning) and machine learning (sensing the noisy world)
+				
+				\vspace*{2em}
+				
+				\onslide<2->{
+				\begin{center}
+					\includegraphics[width=.9\textwidth]{fig/openai-scam.jpg}
+					
+					
+					\large Do not be naughty
+				\end{center}
+				
+				}
+			\end{center}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[c]\frametitle{Thanks and Acknowledgement}
@@ -2734,10 +2810,11 @@
 		\item Leonardo Amado (PhD Student)
 		\item Juarez Monteiro (PhD Student)
 		\item Roger Granada (Postdoc)
-		\item Mor Vered (Monash University)
-		\item Gal Kaminka (Bar Ilan University)
-		\item Miquel Ramirez (University of Melbourne) 
-		\item Nir Oren (University of Aberdeen)
+		\item Mor Vered (Monash University, Australia)
+		\item Gal Kaminka (Bar Ilan University, Israel)
+		\item Miquel Ramirez (University of Melbourne, Australia) 
+		\item Nir Oren (University of Aberdeen, Scotland)
+		\item André Grahl Pereira (UFRGS)
 		\item Rodrigo Barros (PUCRS colleague) 
 		\item Duncan Ruiz (PUCRS colleague) 
 	\end{itemize}
@@ -2748,6 +2825,31 @@
 	\begin{itemize}
 		\item The Scottish Informatics and Computer Science Alliance (SICSA) \\ Distinguished Visiting Fellowship (DVE)
 		\item Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq) -- PQ Fellowship
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[c, allowframebreaks]\frametitle{Papers reporting these results}
+	\footnotesize
+	\begin{itemize}
+	\item[] PEREIRA, Ramon. F.; PEREIRA, André G.; MENEGUZZI, Felipe. \textbf{Landmark-Enhanced Heuristics for Goal Recognition in Incomplete Domain Models.} ICAPS, 2019. 
+	\item[] PEREIRA, Ramon. F.; VERED, Mor; MENEGUZZI, Felipe; RAMIREZ, Miquel. \textbf{Online Probabilistic Goal Recognition over Nominal Models.} IJCAI, 2019. 
+	\item[] AMADO, Leonardo R.; AIRES, João Paulo; PEREIRA, Ramon F.; MAGNAGUAGNO, Maurício C.; GRANADA, Roger L.; MENEGUZZI, Felipe. \textbf{An LSTM-Based Approach for Goal Recognition in Latent Space.} PAIR@AAAI, 2019. 
+	\item[] MENEGUZZI, Felipe; PEREIRA, André G.; PEREIRA, Ramon. F.. \textbf{Robust Goal Recognition with Operator-Counting Heuristics.} XAIP@ICAPS, 2019.  
+	
+	\framebreak
+	
+	\item[] AMADO, Leonardo R.; PEREIRA, Ramon F.; AIRES, João Paulo; MAGNAGUAGNO, Maurício C.; GRANADA, Roger Leitzke; and MENEGUZZI, Felipe. \textbf{Goal Recognition in Latent Space.} IJCNN, 2018.
+	\item[] AMADO, Leonardo R.; PEREIRA, Ramon F.; AIRES, João Paulo; MAGNAGUAGNO, Maurício C.; GRANADA, Roger Leitzke; and MENEGUZZI, Felipe. \textbf{Goal Recognition in Latent Space.} IJCNN, 2018.
+	\item[] VERED, Mor; PEREIRA, Ramon F.; KAMINKA, Gal; and MENEGUZZI, Felipe. \textbf{Online Goal Recognition as Reasoning over Landmarks.} PAIR@AAAI, 2018.
+	\item[] VERED, Mor; PEREIRA, Ramon F.; KAMINKA, Gal; and MENEGUZZI, Felipe. \textbf{Towards Online Goal Recognition Combining Goal Mirroring and Landmarks.} AAMAS, 2018.
+	\framebreak
+	\item[] FRAGA PEREIRA, Ramon; MENEGUZZI, Felipe. \textbf{Landmark-based Plan Recognition.} ECAI, 2016.
+	\item[] PEREIRA, Ramon F.; OREN, Nir; and MENEGUZZI, Felipe. \textbf{Landmark-Based Heuristics for Goal Recognition}. AAAI, 2017.
+	\item[] PEREIRA, Ramon F.; OREN, Nir; and MENEGUZZI, Felipe. \textbf{Monitoring Plan Optimality using Landmarks and Domain-Independent Heuristics}. PAIR Workshop@AAAI, 2017.
+    \item[] GRANADA, Roger L.; PEREIRA, Ramon F.; MONTEIRO, Juarez; BARROS, Rodrigo; RUIZ, Duncan; and MENEGUZZI, Felipe. \textbf{Hybrid Activity and Plan Recognition for Video Streams}. PAIR Workshop@AAAI, 2017.
+    \item[] PEREIRA, Ramon F.; OREN, Nir; and MENEGUZZI, Felipe. \textbf{Detecting Commitment Abandonment by Monitoring Plan Execution}. AAMAS, 2017.
+    \item[] MONTEIRO, Juarez; GRANADA, Roger; BARROS, Rodrigo and MENEGUZZI, Felipe. \textbf{Deep Neural Networks for Kitchen Activity Recognition}. IJCNN, 2017.
+    \item[] VERED, Mor; PEREIRA, Ramon F.; MAGNAGUAGNO, Maurício C.; KAMINKA, Gal; and MENEGUZZI, Felipe. \textbf{Online Goal Recognition Combining Landmarks and Planning}. GRW@IJCAI, 2017.
 	\end{itemize}
 \end{frame}
 
